@@ -27,5 +27,9 @@ ENV DISPLAY=$DISPLAY
 # Expose SSH port
 EXPOSE 22
 
+WORKDIR /home/genesys
+
+COPY . .
+
 # Start Xfce when the container starts
 CMD ["/bin/bash"]
