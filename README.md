@@ -26,3 +26,20 @@ docker start container-name
 
 docker exec -it container-name command
 ```
+
+# Scripts
+Além dos containers foi disponibilizado alguns scripts para a manutenção e disponibilização.
+
+## build
+Esse script irá montar a imagem da interface gráfica do Genesys com base na branch do repositório em que ele foi executado, após montar a imagem ele irá também gerar um arquivo '.tar' dessa imagem, que será utilizado para gerar um segundo arquivo compactado contendo a imagem e um script para sua inicialização. A ideia é que ao rodar esse script você terá como retorno um pacote capaz de inicializar a interface gráfica do Genesys em qualquer máquina que possua o docker instalado.
+
+## start_container
+Esse script faz a inicialização do container da interface gráfica do Genesys. Basicamente ele necessita da imagem compactada do Genesys para carregar essa imagem usando o docker e inicializá-la como deve ser feita.
+
+# Sugestões
+
+## Integração Contínua
+É possível utilizar runners, como do gitlab por exemplo, para automatizar a atualização das imagens do projeto. Eles iriam executar os scripts já existentes para buildar e disponibilizar as imagens, toda vez que a branch main fosse atualizada, mantendo assim a imagem sempre na versão mais atualizada do repositório.
+
+## Registro de container
+É possível utilizar serviços de registro de container, como o próprio Docker HUB ou outros, para se disponibilizar as imagens do projeto. A maioria dos registros são pagos, ou bloqueiam algumas funcionalidades através de pagamentos, entretando eles oferecem funções como versionamento de imagens, o que permitiria um usuário baixar qualquer versão do Genesys disponibilizada neste registro. Para acessar as imagens os usuários usariam o próprio docker, informando o url do registro na web (muitas vezes também um usuário e senha de acesso) e fariam download da imagem para seu registro local, tendo apenas que executar o script para sua inicialização localmente. Além disso, utilizando a integração contínua, é possível atualizar as versões das imagens no registro automaticamente.
