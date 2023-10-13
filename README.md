@@ -21,7 +21,7 @@ wsl --install
 ```
 
 Ápos a instalação comandos docker executados em secao WSL serão processados pelo Docker engine da máquina host e poderão ser visualizados na interface Docker Desktop.
-Assim como para o container para Linux é necessário montar o volume do socket X11 do Ubuntu WSL com o container. Os comandos disponibilizados no script docker-genesys.sh são válidos para execucao no WSL, contudo será necessário copiar o arquivo do file system do windows para o do WSL.
+Assim como para o container para Linux é necessário montar o volume do socket X11 do Ubuntu WSL com o container. Os comandos disponibilizados no script docker-genesys.sh são válidos para execucao no WSL, contudo como os sockets X11 do WSL estão em volumes especiais no windows, os containers não irão funcionar como esperado. Para iniciar um container no windows basta seguir os passos abaixo:
 
 FOTO
 FOTO
