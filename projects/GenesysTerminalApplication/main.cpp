@@ -13,6 +13,7 @@ ss * Created on 21 de Junho de 2018, 12:47
  */
 
 #include "../../source/applications/TraitsApp.h"
+#include "../../source/applications/GenesysApplication_if.h"
 
 /*!
  * This is the MAIN application of GenESyS. It just calls the Application specificied on the configuration/traits file.
