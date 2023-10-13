@@ -134,8 +134,8 @@
               <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_PriorityExample.h</itemPath>
               <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_ProcessArena.cpp</itemPath>
               <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_ProcessArena.h</itemPath>
-              <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_Record.cpp</itemPath>
-              <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_Record.h</itemPath>
+              <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.cpp</itemPath>
+              <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.h</itemPath>
               <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_RemovingAndReorderingEntitiesInAQueue.cpp</itemPath>
               <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_RemovingAndReorderingEntitiesInAQueue.h</itemPath>
               <itemPath>../../source/applications/terminal/examples/arenaSmarts/Smart_ResourceCosting.cpp</itemPath>
@@ -186,8 +186,8 @@
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_HoldSearchRemove.h</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_ModelInfoModelSimulation.cpp</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_ModelInfoModelSimulation.h</itemPath>
-              <itemPath>../../source/applications/terminal/examples/smarts/Smart_ODE.cpp</itemPath>
-              <itemPath>../../source/applications/terminal/examples/smarts/Smart_ODE.h</itemPath>
+              <itemPath>../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp</itemPath>
+              <itemPath>../../source/applications/terminal/examples/smarts/Smart_LSODE.h</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_OnEvent.cpp</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_OnEvent.h</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_Parser.cpp</itemPath>
@@ -1083,12 +1083,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/arenaSmarts/Smart_Record.cpp"
+      <item path="../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/arenaSmarts/Smart_Record.h"
+      <item path="../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -1313,12 +1313,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/smarts/Smart_ODE.cpp"
+      <item path="../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/smarts/Smart_ODE.h"
+      <item path="../../source/applications/terminal/examples/smarts/Smart_LSODE.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -3417,12 +3417,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/arenaSmarts/Smart_Record.cpp"
+      <item path="../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/arenaSmarts/Smart_Record.h"
+      <item path="../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -3647,12 +3647,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/smarts/Smart_ODE.cpp"
+      <item path="../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/smarts/Smart_ODE.h"
+      <item path="../../source/applications/terminal/examples/smarts/Smart_LSODE.h"
             ex="false"
             tool="3"
             flavor2="0">

@@ -4,7 +4,7 @@
  */
 
 /* 
- * File:   Smart_ODE.h
+ * File:   Smart_LSODE.h
  * Author: rlcancian
  *
  * Created on 11 de janeiro de 2022, 19:29

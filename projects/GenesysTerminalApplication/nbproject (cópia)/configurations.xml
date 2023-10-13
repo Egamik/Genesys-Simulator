@@ -86,8 +86,8 @@
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_HoldSearchRemove.h</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_ModelInfoModelSimulation.cpp</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_ModelInfoModelSimulation.h</itemPath>
-              <itemPath>../../source/applications/terminal/examples/smarts/Smart_ODE.cpp</itemPath>
-              <itemPath>../../source/applications/terminal/examples/smarts/Smart_ODE.h</itemPath>
+              <itemPath>../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp</itemPath>
+              <itemPath>../../source/applications/terminal/examples/smarts/Smart_LSODE.h</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_OnEvent.cpp</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_OnEvent.h</itemPath>
               <itemPath>../../source/applications/terminal/examples/smarts/Smart_Parser.cpp</itemPath>
@@ -728,12 +728,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/smarts/Smart_ODE.cpp"
+      <item path="../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/smarts/Smart_ODE.h"
+      <item path="../../source/applications/terminal/examples/smarts/Smart_LSODE.h"
             ex="false"
             tool="3"
             flavor2="0">
@@ -2499,12 +2499,12 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/smarts/Smart_ODE.cpp"
+      <item path="../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp"
             ex="false"
             tool="1"
             flavor2="0">
       </item>
-      <item path="../../source/applications/terminal/examples/smarts/Smart_ODE.h"
+      <item path="../../source/applications/terminal/examples/smarts/Smart_LSODE.h"
             ex="false"
             tool="3"
             flavor2="0">

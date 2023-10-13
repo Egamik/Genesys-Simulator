@@ -72,7 +72,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/577f3b86/Smart_PlacingEntitiesInQueueSets.o \
 	${OBJECTDIR}/_ext/577f3b86/Smart_PriorityExample.o \
 	${OBJECTDIR}/_ext/577f3b86/Smart_ProcessArena.o \
-	${OBJECTDIR}/_ext/577f3b86/Smart_Record.o \
+	${OBJECTDIR}/_ext/577f3b86/Smart_Record_Arena.o \
 	${OBJECTDIR}/_ext/577f3b86/Smart_RemovingAndReorderingEntitiesInAQueue.o \
 	${OBJECTDIR}/_ext/577f3b86/Smart_ResourceCosting.o \
 	${OBJECTDIR}/_ext/577f3b86/Smart_ResourceScheduleCosting.o \
@@ -95,7 +95,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/296208d5/Smart_FiniteStateMachine.o \
 	${OBJECTDIR}/_ext/296208d5/Smart_HoldSearchRemove.o \
 	${OBJECTDIR}/_ext/296208d5/Smart_ModelInfoModelSimulation.o \
-	${OBJECTDIR}/_ext/296208d5/Smart_ODE.o \
+	${OBJECTDIR}/_ext/296208d5/Smart_LSODE.o \
 	${OBJECTDIR}/_ext/296208d5/Smart_OnEvent.o \
 	${OBJECTDIR}/_ext/296208d5/Smart_Parser.o \
 	${OBJECTDIR}/_ext/296208d5/Smart_ParserModelFunctions.o \
@@ -420,9 +420,9 @@ ${OBJECTDIR}/_ext/577f3b86/Smart_ProcessArena.o: ../../source/applications/termi
 	${MKDIR} -p ${OBJECTDIR}/_ext/577f3b86
 	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/577f3b86/Smart_ProcessArena.o ../../source/applications/terminal/examples/arenaSmarts/Smart_ProcessArena.cpp
 
-${OBJECTDIR}/_ext/577f3b86/Smart_Record.o: ../../source/applications/terminal/examples/arenaSmarts/Smart_Record.cpp
+${OBJECTDIR}/_ext/577f3b86/Smart_Record_Arena.o: ../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/577f3b86
-	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/577f3b86/Smart_Record.o ../../source/applications/terminal/examples/arenaSmarts/Smart_Record.cpp
+	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/577f3b86/Smart_Record_Arena.o ../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.cpp
 
 ${OBJECTDIR}/_ext/577f3b86/Smart_RemovingAndReorderingEntitiesInAQueue.o: ../../source/applications/terminal/examples/arenaSmarts/Smart_RemovingAndReorderingEntitiesInAQueue.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/577f3b86
@@ -512,9 +512,9 @@ ${OBJECTDIR}/_ext/296208d5/Smart_ModelInfoModelSimulation.o: ../../source/applic
 	${MKDIR} -p ${OBJECTDIR}/_ext/296208d5
 	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/296208d5/Smart_ModelInfoModelSimulation.o ../../source/applications/terminal/examples/smarts/Smart_ModelInfoModelSimulation.cpp
 
-${OBJECTDIR}/_ext/296208d5/Smart_ODE.o: ../../source/applications/terminal/examples/smarts/Smart_ODE.cpp
+${OBJECTDIR}/_ext/296208d5/Smart_LSODE.o: ../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/296208d5
-	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/296208d5/Smart_ODE.o ../../source/applications/terminal/examples/smarts/Smart_ODE.cpp
+	$(COMPILE.cc) -g -I../../source/gtest -std=c++14 -o ${OBJECTDIR}/_ext/296208d5/Smart_LSODE.o ../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp
 
 ${OBJECTDIR}/_ext/296208d5/Smart_OnEvent.o: ../../source/applications/terminal/examples/smarts/Smart_OnEvent.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/296208d5
@@ -1538,16 +1538,16 @@ ${OBJECTDIR}/_ext/577f3b86/Smart_ProcessArena_nomain.o: ${OBJECTDIR}/_ext/577f3b
 	    ${CP} ${OBJECTDIR}/_ext/577f3b86/Smart_ProcessArena.o ${OBJECTDIR}/_ext/577f3b86/Smart_ProcessArena_nomain.o;\
 	fi
 
-${OBJECTDIR}/_ext/577f3b86/Smart_Record_nomain.o: ${OBJECTDIR}/_ext/577f3b86/Smart_Record.o ../../source/applications/terminal/examples/arenaSmarts/Smart_Record.cpp 
+${OBJECTDIR}/_ext/577f3b86/Smart_Record_nomain.o: ${OBJECTDIR}/_ext/577f3b86/Smart_Record_Arena.o ../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/577f3b86
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/577f3b86/Smart_Record.o`; \
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/577f3b86/Smart_Record_Arena.o`; \
 	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
-	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/577f3b86/Smart_Record_nomain.o ../../source/applications/terminal/examples/arenaSmarts/Smart_Record.cpp;\
+	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/577f3b86/Smart_Record_nomain.o ../../source/applications/terminal/examples/arenaSmarts/Smart_Record_Arena.cpp;\
 	else  \
-	    ${CP} ${OBJECTDIR}/_ext/577f3b86/Smart_Record.o ${OBJECTDIR}/_ext/577f3b86/Smart_Record_nomain.o;\
+	    ${CP} ${OBJECTDIR}/_ext/577f3b86/Smart_Record_Arena.o ${OBJECTDIR}/_ext/577f3b86/Smart_Record_nomain.o;\
 	fi
 
 ${OBJECTDIR}/_ext/577f3b86/Smart_RemovingAndReorderingEntitiesInAQueue_nomain.o: ${OBJECTDIR}/_ext/577f3b86/Smart_RemovingAndReorderingEntitiesInAQueue.o ../../source/applications/terminal/examples/arenaSmarts/Smart_RemovingAndReorderingEntitiesInAQueue.cpp 
@@ -1814,16 +1814,16 @@ ${OBJECTDIR}/_ext/296208d5/Smart_ModelInfoModelSimulation_nomain.o: ${OBJECTDIR}
 	    ${CP} ${OBJECTDIR}/_ext/296208d5/Smart_ModelInfoModelSimulation.o ${OBJECTDIR}/_ext/296208d5/Smart_ModelInfoModelSimulation_nomain.o;\
 	fi
 
-${OBJECTDIR}/_ext/296208d5/Smart_ODE_nomain.o: ${OBJECTDIR}/_ext/296208d5/Smart_ODE.o ../../source/applications/terminal/examples/smarts/Smart_ODE.cpp 
+${OBJECTDIR}/_ext/296208d5/Smart_ODE_nomain.o: ${OBJECTDIR}/_ext/296208d5/Smart_LSODE.o ../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/296208d5
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/296208d5/Smart_ODE.o`; \
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/_ext/296208d5/Smart_LSODE.o`; \
 	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
-	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/296208d5/Smart_ODE_nomain.o ../../source/applications/terminal/examples/smarts/Smart_ODE.cpp;\
+	    $(COMPILE.cc) -g -I../../source/gtest -std=c++14 -Dmain=__nomain -o ${OBJECTDIR}/_ext/296208d5/Smart_ODE_nomain.o ../../source/applications/terminal/examples/smarts/Smart_LSODE.cpp;\
 	else  \
-	    ${CP} ${OBJECTDIR}/_ext/296208d5/Smart_ODE.o ${OBJECTDIR}/_ext/296208d5/Smart_ODE_nomain.o;\
+	    ${CP} ${OBJECTDIR}/_ext/296208d5/Smart_LSODE.o ${OBJECTDIR}/_ext/296208d5/Smart_ODE_nomain.o;\
 	fi
 
 ${OBJECTDIR}/_ext/296208d5/Smart_OnEvent_nomain.o: ${OBJECTDIR}/_ext/296208d5/Smart_OnEvent.o ../../source/applications/terminal/examples/smarts/Smart_OnEvent.cpp 
