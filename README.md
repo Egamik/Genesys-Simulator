@@ -1,8 +1,8 @@
 # Genesys-Simulator
-Dockerização do ambiente de desenvolvimento para o simulador Genesys
+Dockerização do ambiente de desenvolvimento para o simulador Genesys.
 
 # Docker
-Escrever coisas legais sobre docker
+Docker é uma poderosa plataforma para desenvolvimento, compartilhamento e execução de aplicações. Ela nos oferece uma forma de empacotar aplicações e suas dependências em container leves e portáveis. Esses containers podem ser executados consistentemente em diferentes ambientes, desde de o laptop do desenvolvedor até um server de produção, garantindo que a aplicação se comporte da mesma maneira em qualquer lugar.
 
 # X Window System 11
 O protocolo se trata de um sistema de janelas por rede para sistemas UNIX, criado em 1980 o protocolo tem como objetivo permitir que um cliente e um servidor possam abrir seções interativas por meio de janelas GUI, em que o cliente pode executar um processo e o servidor pode abrir a janela do processo e interajir com o mesmo por meio dos seus dispositivos de entrada. Atualmente, o X11 vem empacotado com a maioria das distribuicoes Linux.
