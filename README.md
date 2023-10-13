@@ -14,7 +14,18 @@ Antes de subir o container certifique-se de que o X11 está instalado na máquin
 dpkg -l | grep xorg
 ```
 
-Para sistemas UNIX basta que o xorg esteja instalado, juntamente com o xauth e executar o script start_container.sh.
+Para sistemas UNIX basta que o xorg esteja instalado, juntamente com o xauth e executar o script start_container.sh. Em sistemas windows será necessario instalar o Windows Subsystem for Linux (WSL). Em uma seção Powershell administrador, execute o comando:
+
+```
+wsl --install
+```
+
+Ápos a instalação comandos docker executados em secao WSL serão processados pelo Docker engine da máquina host e poderão ser visualizados na interface Docker Desktop.
+Assim como para o container para Linux é necessário montar o volume do socket X11 do Ubuntu WSL com o container.
+
+FOTO
+FOTO
+FOTO
 
 OBS: Containers docker não têm seus contextos salvos apos o termino da execucao, se voce fez alteracoes no container e que manter as modificacoes ou salve o container como uma nova imagem, ou não remova o container.
 
