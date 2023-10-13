@@ -7,7 +7,7 @@ Docker é uma poderosa plataforma para desenvolvimento, compartilhamento e execu
 # X Window System 11
 O protocolo se trata de um sistema de janelas por rede para sistemas UNIX, criado em 1980 o protocolo tem como objetivo permitir que um cliente e um servidor possam abrir seções interativas por meio de janelas GUI, em que o cliente pode executar um processo e o servidor pode abrir a janela do processo e interajir com o mesmo por meio dos seus dispositivos de entrada. Atualmente, o X11 vem empacotado com a maioria das distribuicoes Linux.
 
-# Set up e execucao
+# Set up e execução
 Antes de subir o container certifique-se de que o X11 está instalado na máquina hospedeira. Você pode executar o comando abaixo para certificar que o pacote está presente:
 
 ```
@@ -21,7 +21,7 @@ wsl --install
 ```
 
 Ápos a instalação comandos docker executados em secao WSL serão processados pelo Docker engine da máquina host e poderão ser visualizados na interface Docker Desktop.
-Assim como para o container para Linux é necessário montar o volume do socket X11 do Ubuntu WSL com o container.
+Assim como para o container para Linux é necessário montar o volume do socket X11 do Ubuntu WSL com o container. Os comandos disponibilizados no script docker-genesys.sh são válidos para execucao no WSL, contudo será necessário copiar o arquivo do file system do windows para o do WSL.
 
 FOTO
 FOTO
@@ -38,14 +38,20 @@ docker start container-name
 docker exec -it container-name command
 ```
 
-# Scripts
-Além dos containers foi disponibilizado alguns scripts para a manutenção e disponibilização.
+# Script
+Além dos containers foi disponibilizado um script para a manutenção e disponibilização de imagens e containers.
 
 ## build
-Esse script irá montar a imagem da interface gráfica do Genesys com base na branch do repositório em que ele foi executado, após montar a imagem ele irá também gerar um arquivo '.tar' dessa imagem, que será utilizado para gerar um segundo arquivo compactado contendo a imagem e um script para sua inicialização. A ideia é que ao rodar esse script você terá como retorno um pacote capaz de inicializar a interface gráfica do Genesys em qualquer máquina que possua o docker instalado.
+Essa função irá montar a imagem da interface gráfica do Genesys com base na branch do repositório em que ele foi executado, após montar a imagem ele irá também gerar um arquivo '.tar' dessa imagem, que será utilizado para gerar um segundo arquivo compactado contendo a imagem e um script para sua inicialização. A ideia é que ao rodar esse script você terá como retorno um pacote capaz de inicializar a interface gráfica do Genesys em qualquer máquina que possua o docker instalado.
 
-## start_container
+## run
 Esse script faz a inicialização do container da interface gráfica do Genesys. Basicamente ele necessita da imagem compactada do Genesys para carregar essa imagem usando o docker e inicializá-la como deve ser feita.
+
+## load
+Essa função carrega uma imagem genesys-sim.tar para a docker engine.
+
+## save
+Essa função commita um container como uma imagem nova, a imagem será nomeada genesys-sim.
 
 # Sugestões
 
