@@ -1,5 +1,7 @@
 #!/bin/bash
 
+docker load -i genesys-sim.tar
+
 # Working directory of socket file
 export XSOCK=/tmp/.X11-unix
 # Temporary access token 
