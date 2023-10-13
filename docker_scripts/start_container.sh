@@ -17,4 +17,4 @@ docker run -it --net host \
         -e XAUTHORITY=$XAUTH \
         -v $XSOCK:$XSOCK \
         -v $XAUTH:$XAUTH \
-        gns3/xeyes
+        genesys-sim
