@@ -40,6 +40,11 @@ COPY ./container-scripts/run-genesys.sh /home/scripts/run-genesys.sh
 RUN echo '#!/bin/bash\ncode --no-sandbox --user-data-dir="/home/genesys/.vscode-root"' > /usr/bin/vscode && \
     chmod +x /usr/bin/vscode
 
+COPY ./container-scripts/recompile-gui /usr/bin/recompile-gui
+COPY ./container-scripts/recompile-shell /usr/bin/recompile-shell
+
+RUN chmod +x /usr/bin/recompile-gui && chmod +x /usr/bin/recompile-shell
+
 WORKDIR /home/scripts
 
 # Start bash when the container starts

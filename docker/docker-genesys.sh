@@ -1,7 +1,8 @@
 #!/bin/bash
 
-default_git_repo=https://github.com/rlcancian2/Genesys-Simulator
-container_command=/bin/bash  # default container command
+default_git_repo=https://github.com/rlcancian2/Genesys-Simulator  # Default Genesys Git repository
+docker_hub_image=modsimgrupo6/genesys:1.0  # Name of the genesys image in the Docker Hub
+container_command=/bin/bash  # Default container command
 
 function handle_load {
         echo "Loading image..."
@@ -10,32 +11,6 @@ function handle_load {
 
 function handle_save {
         docker commit genesys-container genesys-image
-}
-
-function handle_build {
-        echo "Building new image..."
-        cd ..
-        GENESYS = $(pwd)
-
-        # Buildando a imagem
-        docker build -t genesys-image .
-
-        # Criando pasta do pacote
-        mkdir GenesysPkg
-
-        # Adicionando imagem compactada a pasta do pacote
-        cd GenesysPkg
-        docker save -o genesys-image.tar genesys-image:latest
-
-        # Adicionando script de execução da imagem
-        cp GENESYS/docker_scripts/start_container.sh ./
-
-        # Compactando o pacote da imagem com o script
-        cd ..
-        tar -cvf GenesysPkg.tar GenesysPkg
-
-        # Limpando execução do script
-        rm -r GenesysPkg
 }
 
 function prepare_environment {
@@ -51,7 +26,7 @@ function prepare_environment {
         # Generate new access token, set the Authentication Family to 'FamilyWild'
         xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 
-        docker rm genesys-container
+        docker rm genesys-container 2> /dev/null
 
 }
 
@@ -62,7 +37,7 @@ function run_genesys {
         docker run -it --net host --name genesys-container \
                 -e DISPLAY=$DISPLAY \
                 -e XAUTHORITY=$XAUTH \
-                -e command=$command \
+                -e command=${command} \
                 -v $XSOCK:$XSOCK \
                 -v $XAUTH:$XAUTH \
                 genesys-image \
@@ -71,16 +46,27 @@ function run_genesys {
 
 echo -e "\n========= Bem vindo ao Genesys docker ========= \n\n" 
 
-
 # Checando se a imagem do genesys já está instalada na máquina
 IMAGE_NAME=genesys-image
 if docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
     echo -e "Foi encontrada uma imagem do Genesys localmente!\n"
 else
-    echo "Não foi encontrada uma imagem do Genesys localmente. Baixando imagem a partir do Docker Hub..."
-    echo -e "Isto pode levar alguns minutos\n"
-    docker pull modsimgrupo6/genesys:1.0
-    docker image tag modsimgrupo6/genesys:latest genesys-image:latest
+    dockerfile=./Dockerfile
+    if [ -f "$dockerfile" ]; then
+        echo "Não foi encontrada uma imagem do Genesys localmente, no entanto há um script Dockerfile disponível localmente."
+        read -p $"O que deseja fazer?\n...................\n1. Compilar imagem a partir do Dockerfile\n2.Baixar imagem do Docker Hub\n> " input_imagem
+        if [ "$input_imagem" == "1" ]; then
+            docker build -t genesys-image .
+        else
+            # Fazer pull do repositório padrão
+            docker pull ${docker_hub_image}
+        fi
+    else
+        echo "Não foi encontrada uma imagem do Genesys localmente. Baixando imagem do Docker Hub..."
+        echo -e "Isto pode levar alguns minutos\n"
+        docker pull ${docker_hub_image}
+        docker image tag ${docker_hub_image} genesys-image:latest
+        
 fi
 
 read -p $'1. Configuração do repositório git do Genesys
@@ -98,22 +84,20 @@ then
       
       if [ "$input_update_repo" == "s" ]; then
         # Atualizar repositório padrão
-        docker rm genesys-container && docker run -it --name genesys-container -e clone_command=$clone_command genesys-image ./clone-repo.sh
-        docker ps
+        docker rm genesys-container 2> /dev/null && docker run -it --name genesys-container -e clone_command=$clone_command genesys-image ./clone-repo.sh
         handle_save
       else
         # Fazer pull do repositório padrão
-        echo "dummy"
-        # docker pull genesys-image
+        docker pull ${docker_hub_image}
       fi
       
 else
       # Repositório personalizado
       read -p $'\nDigite a branch:\n> ' input_git_branch
-      clone_command=--branch ${input_git_branch} ${input_git_repo}
+      clone_command="--branch ${input_git_branch} ${input_git_repo}"
       
-      docker rm genesys-container
-      docker run -it --name genesys-container -e clone_command=$clone_command genesys-image ./clone-repo.sh
+      docker rm genesys-container 2> /dev/null
+      docker run -it --name genesys-container -e clone_command="${clone_command}" genesys-image ./clone-repo.sh
       handle_save
 fi
 
@@ -129,11 +113,21 @@ read -p "
 
 case "$input" in  # TODO: Fazer um loop aqui
         "1")
-        command=/home/Genesys-Simulator/GenesysQtGUI
+        read -p $'\nDeseja compilar a partir do código-fonte (s/N)?\n> ' input_recompile
+        if [ "$input_recompile" == "s" ]; then
+                command=recompile-gui
+        else
+                command=/home/Genesys-Simulator/GenesysQtGUI
+        fi
         run_genesys
         ;;       
         "2")
-        command=/home/Genesys-Simulator/GenesysShell
+        read -p $'\nDeseja compilar a partir do código-fonte (s/N)?\n> ' input_recompile
+        if [ "$input_recompile" == "s" ]; then
+                command=recompile-shell
+        else
+                command=/home/Genesys-Simulator/GenesysShell
+        fi
         run_genesys
         ;;
         "3")
