@@ -8,7 +8,7 @@ read -p $'Gostaria de acessar o terminal antes de sair (s/N)?\n> ' input_access_
 
 if [ "$input_access_terminal" == "s" ]; then
 
-  echo -e '1. Configuração do usuário do git\n..............................................\n'
+  echo -e '\n1. Configuração do usuário do git\n..............................................\n'
   read -p 'Digite o seu email: ' input_email
   read -p 'Digite o seu username: ' input_username
 
@@ -17,8 +17,9 @@ if [ "$input_access_terminal" == "s" ]; then
 
   echo -e "\nPara poder fazer push e pull requests para um repositório do GitHub, adicione a seguinte chave pública SSH à sua conta do GitHub:\n"
 
-  cat ~/id_rsa.pub
+  cat ~/.ssh/id_rsa.pub
 
+  echo ""
 
   cd /home/Genesys-Simulator && bash     
 fi

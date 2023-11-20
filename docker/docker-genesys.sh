@@ -97,8 +97,10 @@ else
       handle_save
 fi
 
-# TODO: Executar criação de chaves SSH no container
-
+# Executar criação de chaves SSH no container
+docker rm genesys-container 2> /dev/null
+docker run -it --name genesys-container genesys-image generate-ssh-key
+handle_save
 
 read -p "
 2. Menu: O que deseja executar?
