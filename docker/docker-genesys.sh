@@ -4,11 +4,6 @@ default_git_repo=https://github.com/rlcancian2/Genesys-Simulator  # Default Gene
 docker_hub_image=modsimgrupo6/genesys:1.0  # Name of the genesys image in the Docker Hub
 container_command=/bin/bash  # Default container command
 
-function handle_load {
-        echo "Loading image..."
-        docker load -i genesys-image.tar
-}
-
 function handle_save {
         docker commit genesys-container genesys-image
 }
@@ -66,7 +61,7 @@ else
         echo -e "Isto pode levar alguns minutos\n"
         docker pull ${docker_hub_image}
         docker image tag ${docker_hub_image} genesys-image:latest
-        
+    fi
 fi
 
 read -p $'1. Configuração do repositório git do Genesys
@@ -75,8 +70,7 @@ read -p $'1. Configuração do repositório git do Genesys
 Digite a URL do repositório git que será utilizado
 (entrada vazia para usar o repositório padrão)\n> ' input_git_repo
 
-if [ -z "$input_git_repo" ]
-then
+if [ -z "$input_git_repo" ]; then
       # Usar repositório padrão
 
       clone_command=${default_git_repo}
