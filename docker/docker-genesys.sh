@@ -55,6 +55,7 @@ else
         else
             # Fazer pull do repositório padrão
             docker pull ${docker_hub_image}
+            docker image tag ${docker_hub_image} genesys-image:latest
         fi
     else
         echo "Não foi encontrada uma imagem do Genesys localmente. Baixando imagem do Docker Hub..."
@@ -83,6 +84,7 @@ if [ -z "$input_git_repo" ]; then
       else
         # Fazer pull do repositório padrão
         docker pull ${docker_hub_image}
+        docker image tag ${docker_hub_image} genesys-image:latest
       fi
       
 else
@@ -94,6 +96,8 @@ else
       docker run -it --name genesys-container -e clone_command="${clone_command}" genesys-image ./clone-repo.sh
       handle_save
 fi
+
+# TODO: Executar criação de chaves SSH no container
 
 
 read -p "

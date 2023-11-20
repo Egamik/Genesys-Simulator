@@ -1,0 +1,2 @@
+#!/bin/bash
+mkdir ~/.ssh && ssh-keygen -q -t rsa -N '' <<< $'\ny' >/dev/null 2>&1

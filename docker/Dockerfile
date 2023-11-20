@@ -35,15 +35,14 @@ RUN git clone https://github.com/rlcancian2/Genesys-Simulator /home/Genesys-Simu
 COPY ./container-scripts/clone-repo.sh /home/scripts/clone-repo.sh
 COPY ./container-scripts/run-genesys.sh /home/scripts/run-genesys.sh
 
-# RUN echo alias code=\'code --no-sandbox --user-data-dir=\"/home/genesys/.vscode-root\"\' >> /home/genesys/.bashrc
-# RUN . /home/genesys/.bashrc
 RUN echo '#!/bin/bash\ncode --no-sandbox --user-data-dir="/home/genesys/.vscode-root"' > /usr/bin/vscode && \
     chmod +x /usr/bin/vscode
 
 COPY ./container-scripts/recompile-gui /usr/bin/recompile-gui
 COPY ./container-scripts/recompile-shell /usr/bin/recompile-shell
+COPY ./container-scripts/generate-ssh-key /usr/bin/generate-ssh-key
 
-RUN chmod +x /usr/bin/recompile-gui && chmod +x /usr/bin/recompile-shell
+RUN chmod +x /usr/bin/recompile-gui && chmod +x /usr/bin/recompile-shell && chmod +x /usr/bin/generate-ssh-key
 
 WORKDIR /home/scripts
 
