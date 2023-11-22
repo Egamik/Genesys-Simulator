@@ -15,7 +15,7 @@ O protocolo se trata de um sistema de janelas por rede para sistemas UNIX, criad
 
 Nas principais distribuições Linux não é necessário fazer nenhum setup, visto que os pacotes necessários para este projeto já vêm por padrão no sistema operacional.
 
-Para sistemas UNIX basta que o xorg (implementação do protocolo X11) esteja instalado, juntamente com o xauth. Você pode executar os comandos abaixo para certificar-se que os pacotes estão presentes:
+Para sistemas Linux basta que o xorg (implementação do protocolo X11) esteja instalado, juntamente com o xauth. Você pode executar os comandos abaixo para certificar-se que os pacotes estão presentes:
 
 ```
 dpkg -l | grep xorg
