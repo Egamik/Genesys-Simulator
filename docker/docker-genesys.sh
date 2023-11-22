@@ -70,12 +70,6 @@ else
     fi
 fi
 
-# Executar criação de chaves SSH no container
-# Só será criada uma chave SSH no container se não houver uma
-docker rm genesys-container > /dev/null 2> /dev/null
-docker run -it --name genesys-container genesys-image generate-ssh-key
-handle_save
-
 echo -e '1. Configuração do Git
 ..............................................\n'
 
@@ -105,10 +99,6 @@ else
     echo -e "Username: ${GIT_USERNAME}\nEmail: ${GIT_EMAIL}\nRepositório: ${GIT_REPO}\nBranch: ${GIT_BRANCH}"
 fi
 
-# Atualizando arquivo de configuração
-echo -e "GIT_USERNAME=${GIT_USERNAME}\nGIT_EMAIL=${GIT_EMAIL}\nGIT_REPO=${GIT_REPO}\nGIT_BRANCH=${GIT_BRANCH}" > config.sh
-
-
 if [ "$GIT_REPO" == "$default_git_repo" ]; then
       # Usar repositório padrão
 
@@ -134,6 +124,15 @@ else
       handle_save
 fi
 
+
+# Executar criação de chaves SSH no container
+# Só será criada uma chave SSH no container se não houver uma
+docker rm genesys-container > /dev/null 2> /dev/null
+SSH_PUBLIC_KEY=$(docker run -it --name genesys-container genesys-image generate-ssh-key)
+handle_save
+
+# Atualizando arquivo de configuração
+echo -e "# Entradas: Digite aqui as suas configurações\nGIT_USERNAME=${GIT_USERNAME}\nGIT_EMAIL=${GIT_EMAIL}\nGIT_REPO=${GIT_REPO}\nGIT_BRANCH=${GIT_BRANCH}\n\n# Saídas: Configurações geradas pela aplicação\nSSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}" > config.sh
 
 read -p "
 2. Menu: O que deseja executar?

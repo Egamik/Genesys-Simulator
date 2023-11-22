@@ -2,7 +2,11 @@
 $command
 
 # Salvar o trabalho
-echo -e "\nNão se esqueça de salvar seu trabalho. Commite suas alterações e faça o push.\nLembrete: você pode usar o VSCode por meio do comando 'vscode'\n\n"
+echo -e "\n==============================================================================="
+echo -e "Não se esqueça de salvar seu trabalho. Commite suas alterações e faça o push.\nVocê pode usar o VSCode para fazer o controle de versão do seu código.\n\nComandos úteis\n.............."
+echo -e "vscode: Executar o VSCode\nrecompile-gui: Recompile a interface gráfica do Genesys a partir do código-fonte"
+echo -e "recompile-shell: Recompile a aplicação shell do Genesys a partir do código-fonte"
+echo -e "===============================================================================\n"
 
 read -p $'Gostaria de acessar o terminal antes de sair (s/N)?\n> ' input_access_terminal
 
