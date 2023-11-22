@@ -47,17 +47,62 @@ Legenda: Caminho do volume a ser montado durante inicialização do container
 ![volumes](https://github.com/Egamik/Genesys-Simulator/assets/44400533/615a86ba-4a3a-4640-82dc-9b696647b59c)
 Legenda: Montagem do volume da pasta dentro do WSL para pasta do container
 
+# Configuração
+
+A configuração da aplicação é feita no arquivo `config.sh`.
+
+Neste arquivo você pode configurar:
+
+- Username do Git
+- Email do Git
+- Repositório Git a ser utilizado no Docker
+- Branch do repositório
+
+A configuração é feita da seguinte forma: `nome_da_configuração=valor`
+
+Não podem haver espaços na string de configuração.
+
+
 # Execução
 
 A partir do diretório `docker/` deste projeto, execute o script `docker-genesys.sh`:
+
 ```
 ./docker-genesys.sh
 ```
 
 Feito isto, basta seguir as instruções do script que vão surgir no seu terminal.
 
+## Push e Pull de repositórios remotos
+
+Para poder fazer push para repositórios remotos, ou pull de repositórios privados, é necessário o uso de um par de chaves SSH
+para fazer a autenticação do usuário. Portanto, dentro do container será gerado um par de chaves SSH, e a chave pública será escrita
+no arquivo de configuração `config.sh`, na entrada `SSH_PUBLIC_KEY`.
+
+Adicione esta chave pública à sua conta do GitHub/GitLab para poder fazer operações de push e pull no repositório remoto.
+
+
 # Informações adicionais
 
-A imagem Docker gerada pelo Dockerfile deste projeto encontra-se disponível para download em `https://hub.docker.com/repository/docker/modsimgrupo6/genesys/general`.
+A imagem Docker gerada pelo Dockerfile deste projeto encontra-se disponível para download em [https://hub.docker.com/repository/docker/modsimgrupo6/genesys/general](https://hub.docker.com/repository/docker/modsimgrupo6/genesys/general).
 
+## Como obter a imagem do Genesys Docker sem o uso do script
+
+**1. Realizando pull da imagem a partir do Docker Hub**
+
+```
+docker pull modsimgrupo6/genesys:1.0
+docker image tag modsimgrupo6/genesys:1.0 genesys-image:latest
+```
+A imagem estará disponível na sua máquina com o nome `genesys-image`
+
+**2. Buildando a imagem a partir do Dockerfile**
+
+Dentro do diretório `docker/` deste projeto, execute:
+
+```
+docker build -t genesys-image .
+```
+
+A imagem estará disponível na sua máquina com o nome `genesys-image`
 
