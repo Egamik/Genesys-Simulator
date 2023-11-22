@@ -39,7 +39,9 @@ RUN echo '#!/bin/bash\ncode --no-sandbox --user-data-dir="/home/genesys/.vscode-
     chmod +x /usr/bin/vscode
 
 RUN echo '#!/bin/bash\n/home/Genesys-Simulator/GenesysQtGUI 2> /dev/null' > /usr/bin/run-default-gui && \
-    chmod +x /usr/bin/run-default-gui
+    chmod +x /usr/bin/run-default-gui && \
+    echo '#!/bin/bash\nqtcreator 2> /dev/null' > /usr/bin/run-qtcreator && \
+    chmod +x /usr/bin/run-qtcreator
 
 COPY ./container-scripts/recompile-gui /usr/bin/recompile-gui
 COPY ./container-scripts/recompile-shell /usr/bin/recompile-shell

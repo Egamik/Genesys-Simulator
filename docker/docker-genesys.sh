@@ -6,13 +6,15 @@ default_git_repo=https://github.com/rlcancian2/Genesys-Simulator  # Default Gene
 default_git_branch=2023  # Default Genesys Git repository branch
 docker_hub_image=modsimgrupo6/genesys:1.0  # Name of the genesys image in the Docker Hub
 container_command=/bin/bash  # Default container command
+image_name=genesys-image
+
 
 function save_container {
         docker commit genesys-container genesys-image > /dev/null
 }
 
 function prepare_environment {
-        echo "Iniciando container do Genesys..."
+        echo -e "\nIniciando container do Genesys...\n"
         # Working directory of socket file
         export XSOCK=/tmp/.X11-unix
         # Temporary access token 
@@ -47,22 +49,26 @@ function run_genesys {
 echo -e "\n========= Bem vindo ao Genesys docker ========= \n\n" 
 
 # Checando se a imagem do genesys já está instalada na máquina
-IMAGE_NAME=genesys-image
-if docker image inspect $IMAGE_NAME >/dev/null 2>&1; then
+if docker image inspect $image_name >/dev/null 2>&1; then
     echo -e "Foi encontrada uma imagem do Genesys localmente!\n"
 else
     dockerfile=./Dockerfile
     if [ -f "$dockerfile" ]; then
+        # Se houver um Dockerfile no diretório atual, forneça a opção de compilar a imagem
+        
         echo "Não foi encontrada uma imagem do Genesys localmente, no entanto há um script Dockerfile disponível localmente."
         read -p $"O que deseja fazer?\n...................\n1. Compilar imagem a partir do Dockerfile\n2.Baixar imagem do Docker Hub\n> " input_imagem
+        
         if [ "$input_imagem" == "1" ]; then
+            # Buildando a imagem
             docker build -t genesys-image .
         else
-            # Fazer pull do repositório padrão
+            # Fazendo pull do repositório padrão
             docker pull ${docker_hub_image}
             docker image tag ${docker_hub_image} genesys-image:latest
         fi
     else
+        # Se não houver um Dockerfile no diretório atual, faça pull da imagem a partir do Docker Hub
         echo "Não foi encontrada uma imagem do Genesys localmente. Baixando imagem do Docker Hub..."
         echo -e "Isto pode levar alguns minutos\n"
         docker pull ${docker_hub_image}
@@ -78,12 +84,9 @@ if [ -z "$GIT_USERNAME" ] || [ -z "$GIT_EMAIL" ] || [ -z "$GIT_REPO" ] || [ -z "
     if [ -z "$GIT_USERNAME" ]; then
         read -p 'Digite o seu username: ' GIT_USERNAME
     fi
-
-
     if [ -z "$GIT_EMAIL" ]; then
         read -p 'Digite o seu email: ' GIT_EMAIL
     fi
-
     if [ -z "$GIT_REPO" ]; then
         read -p $'Digite a URL do repositório git que será utilizado\n(entrada vazia para usar o repositório padrão)\n> ' GIT_REPO
         if [ -z "$GIT_REPO" ]; then 
@@ -91,7 +94,6 @@ if [ -z "$GIT_USERNAME" ] || [ -z "$GIT_EMAIL" ] || [ -z "$GIT_REPO" ] || [ -z "
             GIT_BRANCH=$default_git_branch
         fi
     fi
-
     if [ -z "$GIT_BRANCH" ]; then
         read -p $'\nDigite a branch do repositório:\n> ' GIT_BRANCH
     fi
@@ -110,7 +112,11 @@ if [ "$GIT_REPO" == "$default_git_repo" ]; then
         docker rm genesys-container > /dev/null 2> /dev/null && docker run -it --name genesys-container -e REPO_PADRAO=true -e clone_command=$clone_command genesys-image ./clone-repo.sh
         save_container
       else
-        # Fazer pull do repositório padrão
+        # Fazer pull da imagem padrão que contém o repositório padrão. Isto é necessário para garantir que a imagem local
+        # corresponda a imagem do Genesys com o repositório padrão.
+
+        echo -e "\nFazendo pull da imagem do Docker Hub...\n"
+
         docker pull ${docker_hub_image}
         docker image tag ${docker_hub_image} genesys-image:latest
       fi
@@ -163,7 +169,7 @@ case "$input" in  # TODO: Fazer um loop aqui
         run_genesys
         ;;
         "3")
-        command=qtcreator
+        command=run-qtcreator
         run_genesys
         ;; 
         "4")
