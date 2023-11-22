@@ -76,7 +76,7 @@ else
     fi
 fi
 
-echo -e '1. Configuração do Git
+echo -e 'Configuração do Git
 ..............................................\n'
 
 if [ -z "$GIT_USERNAME" ] || [ -z "$GIT_EMAIL" ] || [ -z "$GIT_REPO" ] || [ -z "$GIT_BRANCH" ]; then
@@ -140,46 +140,56 @@ save_container
 # Atualizando arquivo de configuração
 echo -e "# Entradas: Digite aqui as suas configurações\nGIT_USERNAME=${GIT_USERNAME}\nGIT_EMAIL=${GIT_EMAIL}\nGIT_REPO=${GIT_REPO}\nGIT_BRANCH=${GIT_BRANCH}\n\n# Saídas: Configurações geradas pela aplicação\nSSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}" > config.sh
 
-read -p "
-2. Menu: O que deseja executar?
+
+while true
+do
+
+    read -p "
+Menu: O que deseja executar?
 ..............................................
 1. Genesys GUI
 2. Genesys Shell
 3. IDE do Genesys (QtCreator)
 4. VSCode
+5. Sair da aplicação
 > " input
 
-case "$input" in  # TODO: Fazer um loop aqui
-        "1")
-        read -p $'\nDeseja compilar a partir do código-fonte (s/N)?\n> ' input_recompile
-        if [ "$input_recompile" == "s" ]; then
-                command=recompile-gui
-        else
-                command=run-default-gui
-        fi
-        run_genesys
-        ;;       
-        "2")
-        read -p $'\nDeseja compilar a partir do código-fonte (s/N)?\n> ' input_recompile
-        if [ "$input_recompile" == "s" ]; then
-                command=recompile-shell
-        else
-                command=/home/Genesys-Simulator/GenesysShell
-        fi
-        run_genesys
-        ;;
-        "3")
-        command=run-qtcreator
-        run_genesys
-        ;; 
-        "4")
-        command=vscode
-        run_genesys
-        ;; 
-        *)
-        echo -e "\nOpção inválida."
-        ;;
-esac
+    if [ "$input" == "5" ]; then
+        break
+    fi
+
+    case "$input" in  # TODO: Fazer um loop aqui
+            "1")
+            read -p $'\nDeseja compilar a partir do código-fonte (s/N)?\n> ' input_recompile
+            if [ "$input_recompile" == "s" ]; then
+                    command=recompile-gui
+            else
+                    command=run-default-gui
+            fi
+            run_genesys
+            ;;       
+            "2")
+            read -p $'\nDeseja compilar a partir do código-fonte (s/N)?\n> ' input_recompile
+            if [ "$input_recompile" == "s" ]; then
+                    command=recompile-shell
+            else
+                    command=/home/Genesys-Simulator/GenesysShell
+            fi
+            run_genesys
+            ;;
+            "3")
+            command=run-qtcreator
+            run_genesys
+            ;; 
+            "4")
+            command=vscode
+            run_genesys
+            ;; 
+            *)
+            echo -e "\nOpção inválida."
+            ;;
+    esac
+done
 
 echo -e "\nSalvando imagem a partir do container..."
 save_container

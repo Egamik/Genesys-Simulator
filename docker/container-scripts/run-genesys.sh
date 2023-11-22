@@ -15,7 +15,8 @@ if [ "$input_access_terminal" == "s" ]; then
   git config --global user.email "${input_email}"
   git config --global user.name "${input_username}"
 
-  echo -e "\nPara poder fazer push e pull requests para um repositório do GitHub, adicione a seguinte chave pública SSH à sua conta do GitHub:\n"
+  echo -e "\nPara sair do terminal tecle Ctrl+D"
+  echo -e "Para poder fazer push e pull requests para um repositório do GitHub, adicione a seguinte chave pública SSH à sua conta do GitHub:\n"
 
   cat ~/.ssh/id_rsa.pub
 
