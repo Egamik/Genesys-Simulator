@@ -38,6 +38,9 @@ COPY ./container-scripts/run-genesys.sh /home/scripts/run-genesys.sh
 RUN echo '#!/bin/bash\ncode --no-sandbox --user-data-dir="/home/genesys/.vscode-root"' > /usr/bin/vscode && \
     chmod +x /usr/bin/vscode
 
+RUN echo '#!/bin/bash\n/home/Genesys-Simulator/GenesysQtGUI 2> /dev/null' > /usr/bin/run-default-gui && \
+    chmod +x /usr/bin/run-default-gui
+
 COPY ./container-scripts/recompile-gui /usr/bin/recompile-gui
 COPY ./container-scripts/recompile-shell /usr/bin/recompile-shell
 COPY ./container-scripts/generate-ssh-key /usr/bin/generate-ssh-key

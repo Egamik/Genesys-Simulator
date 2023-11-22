@@ -8,10 +8,6 @@ read -p $'Gostaria de acessar o terminal antes de sair (s/N)?\n> ' input_access_
 
 if [ "$input_access_terminal" == "s" ]; then
 
-  echo -e '\n1. Configuração do usuário do git\n..............................................\n'
-  read -p 'Digite o seu email: ' input_email
-  read -p 'Digite o seu username: ' input_username
-
   git config --global user.email "${input_email}"
   git config --global user.name "${input_username}"
 
