@@ -7,7 +7,7 @@ default_git_branch=2023  # Default Genesys Git repository branch
 docker_hub_image=modsimgrupo6/genesys:1.0  # Name of the genesys image in the Docker Hub
 container_command=/bin/bash  # Default container command
 
-function handle_save {
+function save_container {
         docker commit genesys-container genesys-image > /dev/null
 }
 
@@ -108,7 +108,7 @@ if [ "$GIT_REPO" == "$default_git_repo" ]; then
       if [ "$input_update_repo" == "s" ]; then
         # Atualizar repositório padrão
         docker rm genesys-container > /dev/null 2> /dev/null && docker run -it --name genesys-container -e REPO_PADRAO=true -e clone_command=$clone_command genesys-image ./clone-repo.sh
-        handle_save
+        save_container
       else
         # Fazer pull do repositório padrão
         docker pull ${docker_hub_image}
@@ -121,7 +121,7 @@ else
       
       docker rm genesys-container > /dev/null 2> /dev/null
       docker run -it --name genesys-container -e clone_command="${clone_command}" genesys-image ./clone-repo.sh
-      handle_save
+      save_container
 fi
 
 
@@ -129,7 +129,7 @@ fi
 # Só será criada uma chave SSH no container se não houver uma
 docker rm genesys-container > /dev/null 2> /dev/null
 SSH_PUBLIC_KEY=$(docker run -it --name genesys-container genesys-image generate-ssh-key)
-handle_save
+save_container
 
 # Atualizando arquivo de configuração
 echo -e "# Entradas: Digite aqui as suas configurações\nGIT_USERNAME=${GIT_USERNAME}\nGIT_EMAIL=${GIT_EMAIL}\nGIT_REPO=${GIT_REPO}\nGIT_BRANCH=${GIT_BRANCH}\n\n# Saídas: Configurações geradas pela aplicação\nSSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}" > config.sh
@@ -176,4 +176,4 @@ case "$input" in  # TODO: Fazer um loop aqui
 esac
 
 echo -e "\nSalvando imagem a partir do container..."
-handle_save
+save_container

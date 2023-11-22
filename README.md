@@ -1,10 +1,12 @@
 # Genesys-Simulator
 Dockerização do ambiente de desenvolvimento e simulação do simulador Genesys.
 
-# Docker
+# Tecnologias
+
+## Docker
 Docker é uma poderosa plataforma para desenvolvimento, compartilhamento e execução de aplicações. Ela nos oferece uma forma de empacotar aplicações e suas dependências em container leves e portáveis. Esses containers podem ser executados consistentemente em diferentes ambientes, desde de o laptop do desenvolvedor até um server de produção, garantindo que a aplicação se comporte da mesma maneira em qualquer lugar.
 
-# X Window System 11
+## X Window System 11
 O protocolo se trata de um sistema de janelas por rede para sistemas UNIX, criado em 1980 o protocolo tem como objetivo permitir que um cliente e um servidor possam abrir seções interativas por meio de janelas GUI, em que o cliente pode executar um processo e o servidor pode abrir a janela do processo e interagir com o mesmo por meio dos seus dispositivos de entrada. Atualmente, o X11 vem empacotado com a maioria das distribuições Linux.
 
 # Setup
@@ -76,11 +78,10 @@ Feito isto, basta seguir as instruções do script que vão surgir no seu termin
 ## Push e Pull de repositórios remotos
 
 Para poder fazer push para repositórios remotos, ou pull de repositórios privados, é necessário o uso de um par de chaves SSH
-para fazer a autenticação do usuário. Portanto, dentro do container será gerado um par de chaves SSH, e a chave pública será escrita
+para fazer a autenticação do usuário. Dentro do container será gerado um par de chaves SSH, e a chave pública será escrita
 no arquivo de configuração `config.sh`, na entrada `SSH_PUBLIC_KEY`.
 
-Adicione esta chave pública à sua conta do GitHub/GitLab para poder fazer operações de push e pull no repositório remoto.
-
+Adicione esta chave pública à sua conta do GitHub/GitLab para poder fazer operações de push e pull em repositórios remotos.
 
 # Informações adicionais
 
