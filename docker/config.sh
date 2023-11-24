@@ -5,4 +5,4 @@ GIT_REPO=https://github.com/rlcancian2/Genesys-Simulator
 GIT_BRANCH=2023
 
 # Saídas: Configurações geradas pela aplicação
-SSH_PUBLIC_KEY=
+# SSH_PUBLIC_KEY=

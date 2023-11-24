@@ -138,7 +138,7 @@ SSH_PUBLIC_KEY=$(docker run -it --name genesys-container genesys-image generate-
 save_container
 
 # Atualizando arquivo de configuração
-echo -e "# Entradas: Digite aqui as suas configurações\nGIT_USERNAME=${GIT_USERNAME}\nGIT_EMAIL=${GIT_EMAIL}\nGIT_REPO=${GIT_REPO}\nGIT_BRANCH=${GIT_BRANCH}\n\n# Saídas: Configurações geradas pela aplicação\nSSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}" > config.sh
+echo -e "# Entradas: Digite aqui as suas configurações\nGIT_USERNAME=${GIT_USERNAME}\nGIT_EMAIL=${GIT_EMAIL}\nGIT_REPO=${GIT_REPO}\nGIT_BRANCH=${GIT_BRANCH}\n\n# Saídas: Configurações geradas pela aplicação\n# SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}" > config.sh
 
 
 while true
