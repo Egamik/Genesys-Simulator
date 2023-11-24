@@ -37,8 +37,8 @@ function run_genesys {
         docker run -it --net host --name genesys-container \
                 -e DISPLAY=$DISPLAY \
                 -e XAUTHORITY=$XAUTH \
-                -e GIT_USER=$GIT_USER \
-                -e GIT_EMAIl=$GIT_EMAIL \
+                -e GIT_USERNAME=$GIT_USERNAME \
+                -e GIT_USER_EMAIL=$GIT_USER_EMAIL \
                 -e command=${command} \
                 -v $XSOCK:$XSOCK \
                 -v $XAUTH:$XAUTH \
@@ -79,13 +79,13 @@ fi
 echo -e 'Configuração do Git
 ..............................................\n'
 
-if [ -z "$GIT_USERNAME" ] || [ -z "$GIT_EMAIL" ] || [ -z "$GIT_REPO" ] || [ -z "$GIT_BRANCH" ]; then
+if [ -z "$GIT_USERNAME" ] || [ -z "$GIT_USER_EMAIL" ] || [ -z "$GIT_REPO" ] || [ -z "$GIT_BRANCH" ]; then
 
     if [ -z "$GIT_USERNAME" ]; then
         read -p 'Digite o seu username: ' GIT_USERNAME
     fi
-    if [ -z "$GIT_EMAIL" ]; then
-        read -p 'Digite o seu email: ' GIT_EMAIL
+    if [ -z "$GIT_USER_EMAIL" ]; then
+        read -p 'Digite o seu email: ' GIT_USER_EMAIL
     fi
     if [ -z "$GIT_REPO" ]; then
         read -p $'Digite a URL do repositório git que será utilizado\n(entrada vazia para usar o repositório padrão)\n> ' GIT_REPO
@@ -98,7 +98,7 @@ if [ -z "$GIT_USERNAME" ] || [ -z "$GIT_EMAIL" ] || [ -z "$GIT_REPO" ] || [ -z "
         read -p $'\nDigite a branch do repositório:\n> ' GIT_BRANCH
     fi
 else
-    echo -e "Username: ${GIT_USERNAME}\nEmail: ${GIT_EMAIL}\nRepositório: ${GIT_REPO}\nBranch: ${GIT_BRANCH}"
+    echo -e "Username: ${GIT_USERNAME}\nEmail: ${GIT_USER_EMAIL}\nRepositório: ${GIT_REPO}\nBranch: ${GIT_BRANCH}"
 fi
 
 if [ "$GIT_REPO" == "$default_git_repo" ]; then
@@ -124,21 +124,31 @@ if [ "$GIT_REPO" == "$default_git_repo" ]; then
 else
       # Repositório personalizado
       clone_command="--branch ${GIT_BRANCH} ${GIT_REPO}"
+
+      # Executar criação de chaves SSH no container
+      # Só será criada uma chave SSH no container se não houver uma
+      docker rm genesys-container > /dev/null 2> /dev/null
+      SSH_PUBLIC_KEY=$(docker run -it --name genesys-container genesys-image generate-ssh-key)
+      save_container
       
+      public_key_created=true
+
       docker rm genesys-container > /dev/null 2> /dev/null
       docker run -it --name genesys-container -e clone_command="${clone_command}" genesys-image ./clone-repo.sh
       save_container
 fi
 
+if [ -z "$public_key_created" ]; then
+    # Executar criação de chaves SSH no container
+    # Só será criada uma chave SSH no container se não houver uma
+    docker rm genesys-container > /dev/null 2> /dev/null
+    SSH_PUBLIC_KEY=$(docker run -it --name genesys-container genesys-image generate-ssh-key)
+    save_container
+fi
 
-# Executar criação de chaves SSH no container
-# Só será criada uma chave SSH no container se não houver uma
-docker rm genesys-container > /dev/null 2> /dev/null
-SSH_PUBLIC_KEY=$(docker run -it --name genesys-container genesys-image generate-ssh-key)
-save_container
 
 # Atualizando arquivo de configuração
-echo -e "# Entradas: Digite aqui as suas configurações\nGIT_USERNAME=${GIT_USERNAME}\nGIT_EMAIL=${GIT_EMAIL}\nGIT_REPO=${GIT_REPO}\nGIT_BRANCH=${GIT_BRANCH}\n\n# Saídas: Configurações geradas pela aplicação\n# SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}" > config.sh
+echo -e "# Entradas: Digite aqui as suas configurações\nGIT_USERNAME=${GIT_USERNAME}\nGIT_USER_EMAIL=${GIT_USER_EMAIL}\nGIT_REPO=${GIT_REPO}\nGIT_BRANCH=${GIT_BRANCH}\n\n# Saídas: Configurações geradas pela aplicação\n# SSH_PUBLIC_KEY=${SSH_PUBLIC_KEY}" > config.sh
 
 
 while true
@@ -158,7 +168,7 @@ Menu: O que deseja executar?
         break
     fi
 
-    case "$input" in  # TODO: Fazer um loop aqui
+    case "$input" in
             "1")
             read -p $'\nDeseja compilar a partir do código-fonte (s/N)?\n> ' input_recompile
             if [ "$input_recompile" == "s" ]; then

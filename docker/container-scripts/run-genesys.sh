@@ -12,8 +12,8 @@ read -p $'Gostaria de acessar o terminal antes de sair (s/N)?\n> ' input_access_
 
 if [ "$input_access_terminal" == "s" ]; then
 
-  git config --global user.email "${input_email}"
-  git config --global user.name "${input_username}"
+  git config --global user.email "${GIT_USER_EMAIL}"
+  git config --global user.name "${GIT_USERNAME}"
 
   echo -e "\nPara sair do terminal tecle Ctrl+D"
   echo -e "Para poder fazer push e pull requests para um repositório do GitHub, adicione a seguinte chave pública SSH à sua conta do GitHub:\n"
