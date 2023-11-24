@@ -114,8 +114,8 @@ No diretório `docker` encontram-se os scripts que são executados na máquina h
 
 ## Aplicações com interface gráfica dentro do container
 
-Para que seja possível exibir janelas de aplicações de interface gráfica que executam dentro do container, foi preciso mapear o socket do `xorg` da máquina host com o container. 
-Além disto, foi criado um token de acesso do `xauth`, o qual foi também foi preciso mapear para dentro do container. O token de acesso é gerado pelo seguinte comando na máquina host (executado pelo script `docker-genesys.sh`):
+Para que seja possível exibir janelas de aplicações de interface gráfica que executam dentro do container, foi preciso mapear o socket do X11 da máquina host com o container. 
+Além disto, foi criado um token de acesso do X11 por meio do `xauth`, o qual foi também foi preciso mapear para dentro do container. O token de acesso é gerado pelo seguinte comando na máquina host (executado pelo script `docker-genesys.sh`):
 ```
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 ```
