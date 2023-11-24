@@ -1,6 +1,8 @@
 # Genesys-Simulator
 Dockerização do ambiente de desenvolvimento e simulação do simulador Genesys.
 
+A documentação completa deste projeto encontra-se em `docker/documentacao.md`.
+
 # Tecnologias
 
 ## Docker
